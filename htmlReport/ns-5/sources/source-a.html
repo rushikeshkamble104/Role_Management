@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UserGroupRoleModel</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.management.role.model</a>
+</div>
+
+<h1>Coverage Summary for Class: UserGroupRoleModel (com.management.role.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserGroupRoleModel</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$4I5uxbuB</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$ae5IAUqs</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$BGA9p55W</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$c0XOVdgm</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$eDETtomx</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$gT4n1VeU</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$ILVAb7Rd</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$K4JzEhT0</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$KTeefkSU</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$LJ1iB6j6</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$MCD0nIq4</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$MEB2a63V</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$Ndv2nzEO</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$NPpUykSN</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$NSYd6kMO</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$qzKBHy5V</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$Tkg25uFi</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$UPZtucgl</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$vVAIzwRs</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$vx7GJ1hI</td>
+  </tr>
+  <tr>
+    <td class="name">UserGroupRoleModel$HibernateProxy$yfil1FoR</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.management.role.model;
+&nbsp;
+&nbsp;import lombok.Data;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;import javax.persistence.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is an Entity model for user group role
+&nbsp; */
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;UserGroupRole&quot;)
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+<b class="fc">&nbsp;@Data</b>
+&nbsp;public class UserGroupRoleModel {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @Column(name = &quot;UserGroupRoleId&quot;)
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<b class="nc">&nbsp;    private int userGroupRoleId;</b>
+&nbsp;
+&nbsp;    @ManyToOne
+<b class="nc">&nbsp;    private RoleModel roleModel;</b>
+&nbsp;
+&nbsp;    @ManyToOne
+<b class="nc">&nbsp;    private UserGroupModel userGroupModel;</b>
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-14 20:40</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+@startuml
+class com.management.role.model.ActivityModel {
+~ List<RoleActivityModel> roleActivityModels
+~ List<ActivityPrivilegeModel> activityPrivilegeModels
+- String activityId
+- String activityName
+}
+class com.management.role.service.ActivityService {
+- ActivityRepository activityRepository
++ ActivityModel saveActivity(ActivityModel)
++ List<ActivityModel> getActivity()
++ ActivityModel updateActivity(String,ActivityModel)
++ void deleteActivity(String)
+}
+class com.management.role.controller.ActivityController {
+~ RBACLogger rbacLogger
+- ActivityService activityService
+- ActivityRepository activityRepository
+~ String className
++ MessageResponse saveActivity(ActivityRequest)
++ List<ActivityModel> getActivity()
++ MessageResponse updateActivity(String,ActivityModel)
++ MessageResponse deleteActivity(String)
+}
+interface com.management.role.repository.ActivityRepository {
+}
+
+
+io.micronaut.data.jpa.repository.JpaRepository <|-- com.management.role.repository.ActivityRepository
+@enduml

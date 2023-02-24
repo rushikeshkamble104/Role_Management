@@ -1,0 +1,253 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RoleController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.management.role.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: RoleController (com.management.role.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RoleController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (64/64)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.management.role.controller;
+&nbsp;
+&nbsp;import com.management.role.dto.MessageResponse;
+&nbsp;import com.management.role.dto.request.RoleRequest;
+&nbsp;import com.management.role.model.RoleModel;
+&nbsp;import com.management.role.repository.RoleRepository;
+&nbsp;import com.management.role.service.RoleService;
+&nbsp;import com.management.role.util.RBACEnum;
+&nbsp;import com.management.role.util.RBACLogger;
+&nbsp;import com.management.role.util.RBACUtility;
+&nbsp;import io.micronaut.core.annotation.ReflectiveAccess;
+&nbsp;import io.micronaut.http.annotation.Body;
+&nbsp;import io.micronaut.http.annotation.Controller;
+&nbsp;import io.micronaut.http.annotation.Delete;
+&nbsp;import io.micronaut.http.annotation.Get;
+&nbsp;import io.micronaut.http.annotation.PathVariable;
+&nbsp;import io.micronaut.http.annotation.Post;
+&nbsp;import io.micronaut.http.annotation.Put;
+&nbsp;import jakarta.inject.Inject;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import static com.management.role.util.RBACUtility.FAILURE;
+&nbsp;import static com.management.role.util.RBACUtility.SUCCESS;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is a controller for role
+&nbsp; */
+&nbsp;@Controller
+<b class="fc">&nbsp;public class RoleController {</b>
+&nbsp;
+&nbsp;
+&nbsp;    @Inject
+&nbsp;    RBACLogger rbacLogger;
+&nbsp;
+&nbsp;    @Inject
+&nbsp;    private RoleService roleService;
+&nbsp;
+&nbsp;    @Inject
+&nbsp;    private RoleRepository roleRepository;
+&nbsp;
+<b class="fc">&nbsp;    final String className = getClass().getSimpleName();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for saving role
+&nbsp;     */
+&nbsp;    @ReflectiveAccess
+&nbsp;    @Post(&quot;/postrole&quot;)
+&nbsp;    public MessageResponse saveRole(@Body RoleRequest roleRequest) {
+&nbsp;
+<b class="fc">&nbsp;        final List&lt;RBACEnum&gt; rbacEnumList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        final String methodName = &quot;saveRoleController&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullRoleId(roleRequest.getRoleId())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateRoleIdRequest :: roleModel.getRoleId object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_ROLE_ID_IS_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if (RBACUtility.invalidRoleId(roleRequest.getRoleId())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateRoleIdRequest :: roleModel.getRoleId object is invalid&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_ROLE_ID_IS_INVALID);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if (roleRepository.existsById(roleRequest.getRoleId())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateRoleIdRequest :: roleModel.getRoleId object is already present in database&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_ROLE_ID_ALREADY_EXISTS);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullRoleName(roleRequest.getRoleName())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateRoleNameRequest :: roleModel.getRoleName object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_ROLE_NAME_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullRoleDescription(roleRequest.getRoleDescription())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateRoleDescriptionRequest :: roleModel.getRoleDescription object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_ROLE_DESCRIPTION_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullRoleCreatedDate(roleRequest.getCreatedDate())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateCreatedDateRequest :: roleModel.getCreatedDate object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_ROLE_CREATED_DATE_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullRoleCreatedBy(roleRequest.getCreatedBy())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateCreatedByRequest :: userGroupModel.getCreatedBy object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_ROLE_CREATED_BY_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullRoleUpdatedDate(roleRequest.getUpdatedDate())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateCreatedByRequest :: roleModel.getUpdatedDate object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_ROLE_UPDATED_DATE_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullRoleUpdatedBy(roleRequest.getUpdatedBy())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateUpdatedByRequest :: roleModel.getUpdatedBy object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_ROLE_UPDATED_BY_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullIsActive(roleRequest.getIsActive())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateIsActiveRequest :: roleModel.getIsActive object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_IS_ACTIVE_IS_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if (RBACUtility.invalidIsActive(roleRequest.getIsActive())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateIsActiveRequest :: roleModel.getIsActive object is invalid. It must be true or false &quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_IS_ACTIVE_IS_INVALID);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!rbacEnumList.isEmpty()) return RBACUtility.addMessage(FAILURE, rbacEnumList);</b>
+&nbsp;        else {
+<b class="fc">&nbsp;            final RoleModel roleModel = new RoleModel();</b>
+<b class="fc">&nbsp;            roleModel.setRoleId(roleRequest.getRoleId());</b>
+<b class="fc">&nbsp;            roleModel.setRoleName(roleRequest.getRoleName());</b>
+<b class="fc">&nbsp;            roleModel.setRoleDescription(roleRequest.getRoleDescription());</b>
+<b class="fc">&nbsp;            roleModel.setCreatedDate(roleRequest.getCreatedDate());</b>
+<b class="fc">&nbsp;            roleModel.setCreatedBy(roleRequest.getCreatedBy());</b>
+<b class="fc">&nbsp;            roleModel.setUpdatedDate(roleRequest.getUpdatedDate());</b>
+<b class="fc">&nbsp;            roleModel.setUpdatedBy(roleRequest.getUpdatedBy());</b>
+<b class="fc">&nbsp;            roleModel.setIsActive(roleRequest.getIsActive());</b>
+<b class="fc">&nbsp;            roleService.saveRole(roleModel);</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;Role Validated and Added Successfully&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ROLE_VALIDATED_AND_ADDED_SUCCESSFULLY);</b>
+<b class="fc">&nbsp;            return RBACUtility.addMessage(SUCCESS, rbacEnumList);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for fetching all roles
+&nbsp;     */
+&nbsp;    @Get(&quot;/getrole&quot;)
+&nbsp;    public List&lt;RoleModel&gt; getRole() {
+<b class="fc">&nbsp;        return roleService.getRole();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for updating role
+&nbsp;     */
+&nbsp;    @Put(&quot;/updaterole/{id}&quot;)
+&nbsp;    public MessageResponse updateRole(@PathVariable String id, @Body RoleModel roleModel) {
+<b class="fc">&nbsp;        final List&lt;RBACEnum&gt; rbacEnumList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        final String methodName = &quot;updateRoleController&quot;;</b>
+<b class="fc">&nbsp;        roleService.updateRole(id, roleModel);</b>
+<b class="fc">&nbsp;        rbacLogger.logs(className, methodName, &quot;Role updated successfully&quot;);</b>
+<b class="fc">&nbsp;        rbacEnumList.add(RBACEnum.ROLE_UPDATED_SUCCESSFULLY);</b>
+<b class="fc">&nbsp;        return RBACUtility.addMessage(SUCCESS, rbacEnumList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for deleting role
+&nbsp;     */
+&nbsp;    @Delete(&quot;/deleterole/{id}&quot;)
+&nbsp;    public MessageResponse deleteRole(@PathVariable(&quot;id&quot;) String id) {
+<b class="fc">&nbsp;        final List&lt;RBACEnum&gt; rbacEnumList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        final String methodName = &quot;deleteRoleController&quot;;</b>
+<b class="fc">&nbsp;        roleService.deleteRole(id);</b>
+<b class="fc">&nbsp;        rbacLogger.logs(className, methodName, &quot;Role deleted successfully&quot;);</b>
+<b class="fc">&nbsp;        rbacEnumList.add(RBACEnum.ROLE_DELETED_SUCCESSFULLY);</b>
+<b class="fc">&nbsp;        return RBACUtility.addMessage(SUCCESS, rbacEnumList);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-14 20:40</div>
+</div>
+</body>
+</html>

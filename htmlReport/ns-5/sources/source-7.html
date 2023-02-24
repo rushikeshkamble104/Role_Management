@@ -1,0 +1,228 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RoleModel</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.management.role.model</a>
+</div>
+
+<h1>Coverage Summary for Class: RoleModel (com.management.role.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RoleModel</td>
+<td class="coverageStat">
+  <span class="percent">
+    23.1%
+  </span>
+  <span class="absValue">
+    (3/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    23.1%
+  </span>
+  <span class="absValue">
+    (3/13)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$aSLaHqeY</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$BqklPTol</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$fl9WI2Vc</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$fltqj8kx</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$GBTHjYg8</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$jxrpyOfg</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$lyEPHChZ</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$mxwZ79Sv</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$OAAiNCfY</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$PfnjKfG7</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$QdPgKMNm</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$RoHMtYKW</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$S3i2auER</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$SaykGL1Y</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$sWL1F9Uq</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$UJaHMkt4</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$uUDxw8R3</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$UWaw6aJb</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$WN5Tw6ww</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$xlWUPhBt</td>
+  </tr>
+  <tr>
+    <td class="name">RoleModel$HibernateProxy$Zb6n4aSP</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    23.1%
+  </span>
+  <span class="absValue">
+    (3/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    23.1%
+  </span>
+  <span class="absValue">
+    (3/13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.management.role.model;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import lombok.Data;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;
+&nbsp;import javax.persistence.*;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is an Entity model for role
+&nbsp; */
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;Role&quot;)
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+<b class="fc">&nbsp;@Data</b>
+&nbsp;public class RoleModel {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @Column(name = &quot;RoleId&quot;)
+<b class="fc">&nbsp;    private String roleId;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;RoleName&quot;)
+<b class="nc">&nbsp;    private String roleName;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;RoleDescription&quot;)
+<b class="nc">&nbsp;    private String roleDescription;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;CreatedDate&quot;)
+<b class="nc">&nbsp;    private String createdDate;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;CreatedBy&quot;)
+<b class="nc">&nbsp;    private String createdBy;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;UpdatedDate&quot;)
+<b class="nc">&nbsp;    private String updatedDate;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;UpdatedBy&quot;)
+<b class="nc">&nbsp;    private String updatedBy;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;IsActive&quot;)
+<b class="nc">&nbsp;    private String isActive;</b>
+&nbsp;
+&nbsp;    @OneToMany(cascade = CascadeType.MERGE, mappedBy = &quot;roleModel&quot;)
+&nbsp;    @JsonIgnore
+<b class="nc">&nbsp;    List&lt;UserGroupRoleModel&gt; userGroupRoleModels;</b>
+&nbsp;
+&nbsp;    @OneToMany(cascade = CascadeType.MERGE, mappedBy = &quot;roleModel&quot;)
+&nbsp;    @JsonIgnore
+<b class="nc">&nbsp;    List&lt;RoleActivityModel&gt; roleActivityModels;</b>
+&nbsp;
+&nbsp;    @OneToMany(cascade = CascadeType.MERGE, mappedBy = &quot;roleModel&quot;)
+&nbsp;    @JsonIgnore
+<b class="nc">&nbsp;    List&lt;RoleByDepartmentModel&gt; roleByDepartmentModels;</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-14 20:40</div>
+</div>
+</body>
+</html>

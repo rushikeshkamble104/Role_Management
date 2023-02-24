@@ -1,0 +1,140 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ActivityPrivilegeController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.management.role.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: ActivityPrivilegeController (com.management.role.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ActivityPrivilegeController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.management.role.controller;
+&nbsp;
+&nbsp;import com.management.role.model.ActivityPrivilegeModel;
+&nbsp;import com.management.role.service.ActivityPrivilegeService;
+&nbsp;import io.micronaut.http.annotation.Body;
+&nbsp;import io.micronaut.http.annotation.Controller;
+&nbsp;import io.micronaut.http.annotation.Get;
+&nbsp;import io.micronaut.http.annotation.Post;
+&nbsp;import jakarta.inject.Inject;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is a controller for activity privilege
+&nbsp; */
+&nbsp;@Controller
+<b class="fc">&nbsp;public class ActivityPrivilegeController {</b>
+&nbsp;
+&nbsp;    @Inject
+&nbsp;    private ActivityPrivilegeService activityPrivilegeService;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for saving activity privilege
+&nbsp;     */
+&nbsp;    @Post(&quot;/postactivityprivilege&quot;)
+&nbsp;    public ActivityPrivilegeModel saveActivityPrivilege(@Body ActivityPrivilegeModel activityPrivilegeModel) {
+<b class="fc">&nbsp;        return activityPrivilegeService.saveActivityPrivilege(activityPrivilegeModel);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for fetching all activity privileges
+&nbsp;     */
+&nbsp;    @Get(&quot;/getactivityprivilege&quot;)
+&nbsp;    public List&lt;ActivityPrivilegeModel&gt; getActivityPrivilege() {
+<b class="fc">&nbsp;        return activityPrivilegeService.getActivityPrivilege();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-14 20:40</div>
+</div>
+</body>
+</html>

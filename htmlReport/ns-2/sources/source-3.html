@@ -1,0 +1,219 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > DepartmentController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.management.role.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: DepartmentController (com.management.role.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DepartmentController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (37/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.management.role.controller;
+&nbsp;
+&nbsp;import com.management.role.dto.MessageResponse;
+&nbsp;import com.management.role.dto.request.DepartmentRequest;
+&nbsp;import com.management.role.model.DepartmentModel;
+&nbsp;import com.management.role.repository.DepartmentRepository;
+&nbsp;import com.management.role.service.DepartmentService;
+&nbsp;import com.management.role.util.RBACEnum;
+&nbsp;import com.management.role.util.RBACLogger;
+&nbsp;import com.management.role.util.RBACUtility;
+&nbsp;import io.micronaut.core.annotation.ReflectiveAccess;
+&nbsp;import io.micronaut.http.annotation.Body;
+&nbsp;import io.micronaut.http.annotation.Controller;
+&nbsp;import io.micronaut.http.annotation.Delete;
+&nbsp;import io.micronaut.http.annotation.Get;
+&nbsp;import io.micronaut.http.annotation.PathVariable;
+&nbsp;import io.micronaut.http.annotation.Post;
+&nbsp;import io.micronaut.http.annotation.Put;
+&nbsp;import jakarta.inject.Inject;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import static com.management.role.util.RBACUtility.FAILURE;
+&nbsp;import static com.management.role.util.RBACUtility.SUCCESS;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is a controller for department
+&nbsp; */
+&nbsp;@Controller
+<b class="fc">&nbsp;public class DepartmentController {</b>
+&nbsp;
+&nbsp;
+&nbsp;    @Inject
+&nbsp;    RBACLogger rbacLogger;
+&nbsp;
+&nbsp;    @Inject
+&nbsp;    private DepartmentService departmentService;
+&nbsp;
+&nbsp;    @Inject
+&nbsp;    private DepartmentRepository departmentRepository;
+&nbsp;
+<b class="fc">&nbsp;    final String className = getClass().getSimpleName();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for saving department
+&nbsp;     */
+&nbsp;    @ReflectiveAccess
+&nbsp;    @Post(&quot;/postdepartment&quot;)
+&nbsp;    public MessageResponse saveDepartment(@Body DepartmentRequest departmentRequest) {
+&nbsp;
+<b class="fc">&nbsp;        final List&lt;RBACEnum&gt; rbacEnumList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        final String methodName = &quot;saveDepartmentController&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullDepartmentId(departmentRequest.getDepartmentId())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateDepartmentIdRequest :: departmentModel.getDepartmentId object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_DEPARTMENT_ID_IS_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if (RBACUtility.invalidDepartmentId(departmentRequest.getDepartmentId())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateDepartmentIdRequest :: departmentModel.getDepartmentId object is invalid&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_DEPARTMENT_ID_IS_INVALID);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if (departmentRepository.existsById(departmentRequest.getDepartmentId())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateDepartmentIdRequest :: departmentModel.getDepartmentId object is already present in database&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_DEPARTMENT_ID_ALREADY_EXISTS);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullDepartmentName(departmentRequest.getDepartmentName())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateDepartmentNameRequest :: departmentModel.getDepartmentName object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_DEPARTMENT_NAME_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!rbacEnumList.isEmpty()) return RBACUtility.addMessage(FAILURE, rbacEnumList);</b>
+&nbsp;        else {
+<b class="fc">&nbsp;            final DepartmentModel departmentModel = new DepartmentModel();</b>
+<b class="fc">&nbsp;            departmentModel.setDepartmentId(departmentRequest.getDepartmentId());</b>
+<b class="fc">&nbsp;            departmentModel.setDepartmentName(departmentRequest.getDepartmentName());</b>
+<b class="fc">&nbsp;            departmentService.saveDepartment(departmentModel);</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;Department Validated and Added Successfully&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.DEPARTMENT_VALIDATED_AND_ADDED_SUCCESSFULLY);</b>
+<b class="fc">&nbsp;            return RBACUtility.addMessage(SUCCESS, rbacEnumList);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for fetching all departments
+&nbsp;     */
+&nbsp;    @Get(&quot;/getdepartment&quot;)
+&nbsp;    public List&lt;DepartmentModel&gt; getDepartment() {
+<b class="fc">&nbsp;        return departmentService.getDepartment();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for updating department
+&nbsp;     */
+&nbsp;    @Put(&quot;/updatedepartment/{id}&quot;)
+&nbsp;    public MessageResponse updateDepartment(@PathVariable String id, @Body DepartmentModel departmentModel) {
+<b class="fc">&nbsp;        final List&lt;RBACEnum&gt; rbacEnumList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        final String methodName = &quot;updateDepartmentController&quot;;</b>
+<b class="fc">&nbsp;        departmentService.updateDepartment(id, departmentModel);</b>
+<b class="fc">&nbsp;        rbacLogger.logs(className, methodName, &quot;Department updated successfully&quot;);</b>
+<b class="fc">&nbsp;        rbacEnumList.add(RBACEnum.DEPARTMENT_UPDATED_SUCCESSFULLY);</b>
+<b class="fc">&nbsp;        return RBACUtility.addMessage(SUCCESS, rbacEnumList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for deleting department
+&nbsp;     */
+&nbsp;    @Delete(&quot;/deletedepartment/{id}&quot;)
+&nbsp;    public MessageResponse deleteDepartment(@PathVariable(&quot;id&quot;) String id) {
+<b class="fc">&nbsp;        final List&lt;RBACEnum&gt; rbacEnumList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        final String methodName = &quot;deleteDepartmentController&quot;;</b>
+<b class="fc">&nbsp;        departmentService.deleteDepartment(id);</b>
+<b class="fc">&nbsp;        rbacLogger.logs(className, methodName, &quot;Department deleted successfully&quot;);</b>
+<b class="fc">&nbsp;        rbacEnumList.add(RBACEnum.DEPARTMENT_DELETED_SUCCESSFULLY);</b>
+<b class="fc">&nbsp;        return RBACUtility.addMessage(SUCCESS, rbacEnumList);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-14 20:40</div>
+</div>
+</body>
+</html>

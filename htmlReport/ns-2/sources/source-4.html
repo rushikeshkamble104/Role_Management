@@ -1,0 +1,241 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PrivilegeController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.management.role.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: PrivilegeController (com.management.role.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PrivilegeController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (57/57)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.management.role.controller;
+&nbsp;
+&nbsp;import com.management.role.dto.MessageResponse;
+&nbsp;import com.management.role.dto.request.PrivilegeRequest;
+&nbsp;import com.management.role.model.ActivityModel;
+&nbsp;import com.management.role.model.PrivilegeModel;
+&nbsp;import com.management.role.repository.PrivilegeRepository;
+&nbsp;import com.management.role.service.PrivilegeService;
+&nbsp;import com.management.role.util.RBACEnum;
+&nbsp;import com.management.role.util.RBACLogger;
+&nbsp;import com.management.role.util.RBACUtility;
+&nbsp;import io.micronaut.core.annotation.ReflectiveAccess;
+&nbsp;import io.micronaut.http.annotation.Body;
+&nbsp;import io.micronaut.http.annotation.Controller;
+&nbsp;import io.micronaut.http.annotation.Delete;
+&nbsp;import io.micronaut.http.annotation.Get;
+&nbsp;import io.micronaut.http.annotation.PathVariable;
+&nbsp;import io.micronaut.http.annotation.Post;
+&nbsp;import io.micronaut.http.annotation.Put;
+&nbsp;import jakarta.inject.Inject;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import static com.management.role.util.RBACUtility.FAILURE;
+&nbsp;import static com.management.role.util.RBACUtility.SUCCESS;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is a controller for privilege
+&nbsp; */
+&nbsp;@Controller
+<b class="fc">&nbsp;public class PrivilegeController {</b>
+&nbsp;
+&nbsp;    @Inject
+&nbsp;    RBACLogger rbacLogger;
+&nbsp;    @Inject
+&nbsp;    private PrivilegeService privilegeService;
+&nbsp;    @Inject
+&nbsp;    private PrivilegeRepository privilegeRepository;
+<b class="fc">&nbsp;    final String className = getClass().getSimpleName();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for saving privilege
+&nbsp;     */
+&nbsp;    @ReflectiveAccess
+&nbsp;    @Post(&quot;/postprivilege&quot;)
+&nbsp;    public MessageResponse savePrivilege(@Body PrivilegeRequest privilegeRequest) {
+&nbsp;
+<b class="fc">&nbsp;        final List&lt;RBACEnum&gt; rbacEnumList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        final String methodName = &quot;savePrivilegeController&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullPrivilegeId(privilegeRequest.getPrivilegeId())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validatePrivilegeIdRequest :: privilegeModel.getPrivilegeId object is null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_PRIVILEGE_ID_IS_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if (RBACUtility.invalidPrivilegeId(privilegeRequest.getPrivilegeId())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validatePrivilegeIdRequest :: privilegeModel.getPrivilegeId object is blank or invalid&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_PRIVILEGE_ID_IS_INVALID);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if (privilegeRepository.existsById(privilegeRequest.getPrivilegeId())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validatePrivilegeIdRequest :: privilegeModel.getPrivilegeId object is already present in database&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_PRIVILEGE_ID_ALREADY_EXISTS);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullPrivilegeName(privilegeRequest.getPrivilegeName())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validatePrivilegeNameRequest :: privilegeModel.getPrivilegeName object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_PRIVILEGE_NAME_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullPrivilegeDescription(privilegeRequest.getDescription())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateDescriptionRequest :: privilegeModel.getDescription object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_PRIVILEGE_DESCRIPTION_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullPrivilegeCreatedBy(privilegeRequest.getCreatedBy())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateCreatedByRequest :: privilegeModel.getCreatedBy object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_PRIVILEGE_CREATED_BY_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullPrivilegeCreatedDate(privilegeRequest.getCreatedDate())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateCreatedDateRequest :: privilegeModel.getCreatedDate object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_PRIVILEGE_CREATED_DATE_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullPrivilegeUpdatedBy(privilegeRequest.getUpdatedBy())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateUpdatedByRequest :: privilegeModel.getUpdatedBy object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_PRIVILEGE_UPDATED_BY_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (RBACUtility.blankOrNullPrivilegeUpdatedDate(privilegeRequest.getUpdatedDate())) {</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;EAZValidator.validateUpdatedDateRequest :: privilegeModel.getUpdatedDate object is blank or null&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.ERROR_REQUEST_PRIVILEGE_UPDATED_DATE_BLANK_OR_NULL);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (!rbacEnumList.isEmpty()) return RBACUtility.addMessage(FAILURE, rbacEnumList);</b>
+&nbsp;        else {
+<b class="fc">&nbsp;            final PrivilegeModel privilegeModel = new PrivilegeModel();</b>
+<b class="fc">&nbsp;            privilegeModel.setPrivilegeId(privilegeRequest.getPrivilegeId());</b>
+<b class="fc">&nbsp;            privilegeModel.setPrivilegeName(privilegeRequest.getPrivilegeName());</b>
+<b class="fc">&nbsp;            privilegeModel.setDescription(privilegeRequest.getDescription());</b>
+<b class="fc">&nbsp;            privilegeModel.setCreatedBy(privilegeRequest.getCreatedBy());</b>
+<b class="fc">&nbsp;            privilegeModel.setCreatedDate(privilegeRequest.getCreatedDate());</b>
+<b class="fc">&nbsp;            privilegeModel.setUpdatedBy(privilegeRequest.getUpdatedBy());</b>
+<b class="fc">&nbsp;            privilegeModel.setUpdatedDate(privilegeRequest.getUpdatedDate());</b>
+<b class="fc">&nbsp;            privilegeService.savePrivilege(privilegeModel);</b>
+<b class="fc">&nbsp;            rbacLogger.logs(className, methodName, &quot;Privilege Validated and Added Successfully&quot;);</b>
+<b class="fc">&nbsp;            rbacEnumList.add(RBACEnum.PRIVILEGE_VALIDATED_AND_ADDED_SUCCESSFULLY);</b>
+<b class="fc">&nbsp;            return RBACUtility.addMessage(SUCCESS, rbacEnumList);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for fetching all privileges
+&nbsp;     */
+&nbsp;    @Get(&quot;/getprivilege&quot;)
+&nbsp;    public List&lt;PrivilegeModel&gt; getPrivilege() {
+<b class="fc">&nbsp;        return privilegeService.getPrivilege();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for updating privilege
+&nbsp;     */
+&nbsp;    @Put(&quot;/updateprivilege/{id}&quot;)
+&nbsp;    public MessageResponse updatePrivilege(@PathVariable String id, @Body PrivilegeModel privilegeModel) {
+<b class="fc">&nbsp;        final List&lt;RBACEnum&gt; rbacEnumList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        final String methodName = &quot;updatePrivilegeController&quot;;</b>
+<b class="fc">&nbsp;        privilegeService.updatePrivilege(id, privilegeModel);</b>
+<b class="fc">&nbsp;        rbacLogger.logs(className, methodName, &quot;Privilege updated successfully&quot;);</b>
+<b class="fc">&nbsp;        rbacEnumList.add(RBACEnum.PRIVILEGE_UPDATED_SUCCESSFULLY);</b>
+<b class="fc">&nbsp;        return RBACUtility.addMessage(SUCCESS, rbacEnumList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used for deleting privilege
+&nbsp;     */
+&nbsp;    @Delete(&quot;/deleteprivilege/{id}&quot;)
+&nbsp;    public MessageResponse deletePrivilege(@PathVariable(&quot;id&quot;) String id) {
+<b class="fc">&nbsp;        final List&lt;RBACEnum&gt; rbacEnumList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        final String methodName = &quot;deletePrivilegeController&quot;;</b>
+<b class="fc">&nbsp;        privilegeService.deletePrivilege(id);</b>
+<b class="fc">&nbsp;        rbacLogger.logs(className, methodName, &quot;Privilege deleted successfully&quot;);</b>
+<b class="fc">&nbsp;        rbacEnumList.add(RBACEnum.PRIVILEGE_DELETED_SUCCESSFULLY);</b>
+<b class="fc">&nbsp;        return RBACUtility.addMessage(SUCCESS, rbacEnumList);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-14 20:40</div>
+</div>
+</body>
+</html>
