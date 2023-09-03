@@ -1,0 +1,19 @@
+
+{
+  "userRoleModel": {
+    "userRoleId": "4",
+    "userRoleName": "CO_LS_FTC_CP",
+    "userRoleDescription": "Loan Servicing_Collection Payment_FTE",
+    "isActive": "true"
+  },
+  "activitiesModel": {
+    "activityId": "4",
+    "activityName": "PDE Updates",
+    "description": "Loan servicing"
+  },
+  "privilegesModel": {
+    "privilegeId": "4",
+    "privilegeName": "Maker",
+    "description": "OK"
+  }
+}
